@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekap Profit and Loss - Premium</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div id="mainCard" class="card-main">
+        <h3>Total Saldo Tersedia</h3>
+        <p id="totalBalance">Rp 0</p>
+    </div>
+
+    <div class="rekap-row">
+        <div class="card-rekap">
+            <small>Pemasukan Hari Ini</small>
+            <div id="dayIncome" class="text-success">Rp 0</div>
+        </div>
+        <div class="card-rekap">
+            <small>Pengeluaran Hari Ini</small>
+            <div id="dayExpense" class="text-danger">Rp 0</div>
+        </div>
+    </div>
+
+    <div class="date-scroller">
+        <button class="btn-nav" id="prevBtn" onclick="DateModule.changeDate(-1)">←</button>
+        <div class="date-display">
+            <span id="displayDayNum">HARI KE-1</span>
+            <b id="displayFullDate">Memuat...</b>
+        </div>
+        <button class="btn-nav" onclick="DateModule.changeDate(1)">→</button>
+    </div>
+
+    <div class="periodic-rekap">
+        <div class="periodic-item">
+            <small>Mingguan</small>
+            <div id="weekProfit">Rp 0</div>
+        </div>
+        <div class="periodic-item" style="border-left: 1px solid #334155; border-right: 1px solid #334155;">
+            <small>Bulanan</small>
+            <div id="monthProfit">Rp 0</div>
+        </div>
+        <div class="periodic-item">
+            <small>Tahunan</small>
+            <div id="yearProfit">Rp 0</div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <h2 class="text-success">💰 Hitung Profit Jualan</h2>
+        <input type="text" id="itemName" placeholder="Nama Barang/Produk">
+        <input type="text" id="costPrice" placeholder="Harga Modal" onkeyup="UIModule.handleFormat(this); TransactionModule.calcPreview()">
+        <input type="text" id="sellPrice" placeholder="Harga Jual" onkeyup="UIModule.handleFormat(this); TransactionModule.calcPreview()">
+        <div id="previewBox" class="preview-box">
+            <span style="font-size: 0.8rem; color: #065f46; display:block">Estimasi Keuntungan:</span>
+            <b id="liveProfit" class="text-success" style="font-size: 1.2rem"></b>
+        </div>
+        <button class="save-btn btn-green" onclick="TransactionModule.saveProfit()">Simpan Transaksi Jual</button>
+    </div>
+
+    <div class="section-box">
+        <h2>📝 Kas & Operasional</h2>
+        <input type="text" id="desc" placeholder="Keterangan (mis: Makan, Bensin)">
+        <input type="text" id="amount" placeholder="Nominal" onkeyup="UIModule.handleFormat(this)">
+        <select id="type">
+            <option value="plus">Pemasukan (+)</option>
+            <option value="minus">Pengeluaran (-)</option>
+        </select>
+        <button class="save-btn" onclick="TransactionModule.saveTransaction()">Catat di Buku Kas</button>
+    </div>
+
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 4px">
+        <h2 style="margin:0">Daftar Transaksi</h2>
+        <span id="itemCount" style="font-size:0.7rem; font-weight:800; color:var(--primary); background: #e0e7ff; padding: 2px 8px; border-radius: 20px;">0 ITEM</span>
+    </div>
+    <div id="historyList"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
